@@ -399,10 +399,22 @@ In practice, toolchains will maintain shared component libraries
 (e.g., a base file containing the Kangxi 214 radical definitions)
 and concatenate or merge them with character definition files before
 parsing. This concatenation is a tooling concern and is outside the
-scope of this specification. A concatenated result MUST be a valid
-CSDL file (single `@csdl` declaration, single optional `@ortho`
-declaration, no duplicate component names except as permitted by
-Section 4.5).
+scope of this specification. However, to ensure interoperability,
+toolchains performing concatenation SHOULD apply the following
+rules:
+
+- **`@csdl` declaration:** The first `@csdl` declaration in
+  concatenation order wins. Subsequent `@csdl` declarations
+  SHOULD be stripped or treated as an error.
+- **`@ortho` declaration:** The first `@ortho` declaration in
+  concatenation order wins. Subsequent `@ortho` declarations
+  SHOULD be stripped or treated as an error.
+- **Duplicate component names:** Last definition wins, per §4.5.
+- **Duplicate alias names:** Error, per constraint 25.
+- **Duplicate character definitions:** Error if same code point
+  with same `ortho:` tag, per §4.7.5.
+
+The concatenated result MUST be a valid CSDL file.
 
 ### 4.3 Expression DAG
 
