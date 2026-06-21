@@ -1532,6 +1532,14 @@ there MUST NOT be a `@comp foo1` block in the same file (and
 vice versa). A Level 1 parser MUST reject a file that contains
 such a collision.
 
+A Level 1 parser with access to pronunciation data (e.g., Unihan
+`kMandarin`) SHOULD validate that alias pinyin names match the
+standard Mandarin pronunciation of the aliased character. For
+example, `@alias kou4 = 口` should generate a warning because 口
+is pronounced kǒu (tone 3), not kòu (tone 4). Such warnings are
+advisory and do not affect conformance; parsers without
+pronunciation data MAY skip this validation.
+
 ---
 
 ## 11. Character Definitions
