@@ -731,11 +731,20 @@ WIDTH       ::= '0' | '1' | '2'
 ### 6.4 Stroke Productions
 
 ```ebnf
-(* Stroke name: a lowercase ASCII identifier with optional hyphen
-   separators. All STROKE_NAME values MUST be members of the closed
-   stroke registry defined in §7 and Appendix C. A Level 1 parser
-   MUST reject any stroke name not in the registry. *)
-STROKE_NAME ::= [a-z]+ ( '-' [a-z]+ )*
+(* Standard stroke name: a lowercase ASCII identifier with optional
+   hyphen separators. All STD_STROKE values MUST be members of the
+   closed stroke registry defined in §7 and Appendix C. A Level 1
+   parser MUST reject any standard stroke name not in the registry. *)
+STD_STROKE  ::= [a-z]+ ( '-' [a-z]+ )*
+
+(* Extension stroke name: x- prefix followed by lowercase ASCII with
+   optional hyphens. Extension strokes are experimental or non-standard.
+   A Level 1 parser MUST accept x- prefixed stroke names without
+   validating against the closed registry. Renderer behavior for
+   extension strokes is implementation-defined. *)
+EXT_STROKE  ::= 'x-' [a-z]+ ( '-' [a-z]+ )*
+
+STROKE_NAME ::= STD_STROKE | EXT_STROKE
 
 (* Stroke invocation *)
 STROKE_EXPR ::= 'S(' STROKE_NAME WS COORD ( WS COORD )+ WS WIDTH ')'
@@ -1107,6 +1116,27 @@ emit a warning when stroke coordinate geometry appears inconsistent
 with the stroke name (e.g., a stroke labeled `heng` with vertical
 coordinates). Such warnings are advisory and do not affect
 conformance.
+
+### 7.5 Extension Strokes
+
+For scripts not fully covered by the 37-stroke registry (e.g.,
+Tangut, Khitan, or experimental notations), CSDL permits extension
+stroke names prefixed with `x-`. Examples: `x-tangut-loop`,
+`x-khitan-dot`, `x-experimental-curve`.
+
+A Level 1 parser MUST accept `x-` prefixed stroke names without
+validating them against the closed registry. The coordinate count
+for extension strokes is not specified; parsers SHOULD accept any
+count >= 2.
+
+Renderer behavior for extension strokes is implementation-defined.
+A renderer MAY render extension strokes as their coordinate
+segments (fallback), MAY ignore them, or MAY implement custom
+handling for recognized extension names.
+
+Extension strokes are intended for experimentation and specialized
+use cases. Widely-adopted extensions may be promoted to the
+standard registry in a future major version.
 
 ---
 

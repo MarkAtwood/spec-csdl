@@ -85,6 +85,7 @@ deterministic; visual presentation is not.
 | Fallback when no ortho-matched definition exists | §4.7.2     |
 | Treatment of unknown `x-` orthography tags as opaque filter keys | §13.3 |
 | Expansion of stroke geometry to filled outlines (Level 3) | §2.2 |
+| Handling of `x-` extension strokes (render as fallback, ignore, or custom) | §7.5 |
 
 ---
 
