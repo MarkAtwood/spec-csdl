@@ -318,6 +318,29 @@ META:     rad: sc: freq: ortho: x-*:
 
 ---
 
+## 13. Japanese Kana (Informative)
+
+While kana are out of scope for normative CSDL, the stroke
+inventory can model them. See [CSDL] Appendix F for details.
+
+**Key insight:** The `quan` (circle/loop) stroke is essential for
+hiragana characters with closed loops: の, る, め, む, ぬ, ね.
+
+**Example:** Hiragana る (ru) is a single stroke ending in a loop:
+
+```
+@comp る ortho:Jpan
+build: s1
+s1 = S(wan-quan [2,2] [10,3] [8,6] [4,8] [6,10] 1)
+@end
+```
+
+Compare to ろ (ro), which has no loop—use `wo` instead of `quan`.
+
+Katakana are predominantly angular and rarely need `quan`.
+
+---
+
 ## References
 
 **[CSDL]**

@@ -43,6 +43,7 @@ and operators.
 18. [Appendix C: Compound Stroke Enumeration](#appendix-c-compound-stroke-enumeration)
 19. [Appendix D: Complete Example File](#appendix-d-complete-example-file)
 20. [Appendix E: Orthography Tag Registry](#appendix-e-orthography-tag-registry)
+21. [Appendix F: Japanese Kana Stroke Analysis (Informative)](#appendix-f-japanese-kana-stroke-analysis-informative)
 
 ---
 
@@ -2403,7 +2404,8 @@ subtags MAY be accepted but are not required.
 `Jpan` and `Kore` are BCP 47 tags for full writing systems that
 include non-ideographic scripts (Kana, Hangul). In CSDL, these
 tags apply only to the Han ideographic subset; CSDL does not
-describe Kana or Hangul.
+normatively describe Kana or Hangul. However, Appendix F provides
+informative guidance on modeling kana using CSDL strokes.
 
 `Hani` indicates a definition valid across multiple Han
 orthographies. It is semantically equivalent to omitting the
@@ -2497,6 +2499,154 @@ Table E.5: Parent-child relationships for tag matching:
 Scripts without a parent relationship (`x-Tang`, `x-Khit`,
 `x-Jurc`, `Yiii`) have no fallback hierarchy. A renderer MUST NOT
 fall back from one of these to a Han definition.
+
+---
+
+## Appendix F: Japanese Kana Stroke Analysis (Informative)
+
+This appendix provides guidance on modeling Japanese hiragana and
+katakana using CSDL strokes. This appendix is informative; kana
+are explicitly out of scope for normative CSDL (see §1.3), but
+authors exploring kana representation will find this analysis
+useful.
+
+### F.1 Hiragana Overview
+
+Hiragana (平仮名) consists of 46 basic characters derived from
+cursive (sōsho 草書) forms of Chinese characters (man'yōgana).
+The flowing, connected nature of hiragana means curved strokes
+(`wan`, `wo`, `quan`) predominate over angular strokes.
+
+**Stroke order rules** follow the same principles as Chinese:
+top-to-bottom, left-to-right, horizontal before vertical. The
+1958 *Hitsujun shidō no tebiki* (筆順指導の手びき) standardized
+stroke orders for Japanese education.
+
+### F.2 Hiragana Characters Requiring `quan`
+
+The `quan` (loop/circle) stroke is essential for hiragana
+characters containing closed loops. Based on analysis of
+authoritative stroke order references:
+
+| Character | Romaji | Loop Description |
+|-----------|--------|------------------|
+| の | no | Entire character is a single loop stroke |
+| る | ru | Closed loop at bottom (distinguishes from ろ) |
+| め | me | Closed loop in lower portion |
+| む | mu | Closed loop embedded in main stroke |
+| ぬ | nu | Double loop structure (most distinctive) |
+| ね | ne | Loop with terminal diagonal flick |
+
+**Borderline cases** (may use `quan` or tight `wo` depending on
+calligraphic style):
+
+| Character | Romaji | Notes |
+|-----------|--------|-------|
+| み | mi | Small loop or hook at bottom |
+| ま | ma | Loop with tail at base |
+| あ | a | Spiral-like loop in third stroke |
+| お | o | Loop in body (similar to あ) |
+| す | su | Small loop on vertical stroke |
+| ゆ | yu | Loop element in upper portion |
+| よ | yo | Loop in upper curve |
+
+**Key distinction:** The character **ろ** (ro) does NOT have a
+loop—this is the defining visual difference from **る** (ru).
+Use `wo` for ろ, `quan` for る.
+
+### F.3 Hiragana Stroke Counts
+
+| Count | Characters |
+|-------|------------|
+| 1 | く、し、つ、て、の、ひ、へ、る、ろ、ん |
+| 2 | い、う、え、こ、す、ち、と、ぬ、ね、み、め、ゆ、よ、ら、り、れ、わ |
+| 3 | あ、お、か、け、さ、せ、そ、に、は、ま、も、や、を |
+| 4 | き、た、な、ふ、ほ |
+
+### F.4 Katakana Overview
+
+Katakana (片仮名) consists of 46 basic characters derived from
+fragments of Chinese characters. Unlike hiragana's flowing curves,
+katakana uses predominantly angular, straight strokes. The `quan`
+stroke is rarely needed for katakana.
+
+**Stroke types:** Katakana primarily uses `heng` (horizontal),
+`shu` (vertical), `pie` (left-falling diagonal), and `na`
+(right-falling diagonal). Compound strokes like `heng-zhe` and
+`shu-zhe` model the angular turns.
+
+### F.5 Katakana Stroke Counts
+
+| Count | Characters |
+|-------|------------|
+| 1 | ノ、フ、ヘ、レ |
+| 2 | ア、イ、カ、ク、コ、ス、セ、ソ、ト、ナ、ニ、ヌ、ハ、ヒ、マ、ム、メ、ヤ、ユ、ラ、リ、ル、ワ、ン |
+| 3 | ウ、エ、オ、キ、ケ、サ、シ、タ、チ、ツ、テ、ヨ、ロ、ヲ、モ |
+| 4 | ネ、ホ |
+
+### F.6 Katakana with Curved Elements
+
+While katakana is predominantly angular, a few characters have
+curved strokes that may use `wan` or `wo`:
+
+| Character | Romaji | Stroke Notes |
+|-----------|--------|--------------|
+| ム | mu | Second stroke curves back |
+| ヌ | nu | Small loop or hook at bottom right |
+| ス | su | Curved second stroke |
+| フ | fu | Single curved stroke |
+| ワ | wa | Curved element in second stroke |
+
+None of these require a closed `quan`; `wo` (reclining hook) or
+`wan` (bend) suffices.
+
+### F.7 Confusable Pairs
+
+Several kana pairs are easily confused. CSDL authors should note
+the distinguishing features:
+
+**Hiragana:**
+- る vs ろ: る has closed loop (quan), ろ does not
+- ぬ vs め: ぬ has crossing diagonal, め is more open
+- は vs ほ: ほ has additional horizontal stroke
+- わ vs れ vs ね: All share curved top-left structure
+
+**Katakana:**
+- シ vs ツ: Stroke orientation differs (シ more horizontal)
+- ソ vs ン: Final stroke direction differs
+- ク vs タ vs ウ: Similar diagonal structures
+
+### F.8 Man'yōgana Origins
+
+Both hiragana and katakana derive from man'yōgana (万葉仮名),
+Chinese characters used phonetically in ancient Japanese. Notable
+shared-origin pairs:
+
+| Sound | Hiragana | Source | Katakana | Source |
+|-------|----------|--------|----------|--------|
+| he | へ | 部 | ヘ | 部 |
+| ni | に | 仁 | ニ | 二 |
+| mo | も | 毛 | モ | 毛 |
+
+The hiragana へ and katakana ヘ are visually near-identical.
+
+### F.9 CSDL Modeling Recommendations
+
+1. **Define kana as leaf components.** Each kana should have its
+   own `@comp` block with explicit stroke definitions rather than
+   derivations from source kanji.
+
+2. **Use `ortho:Jpan` tag.** Mark all kana definitions with the
+   Japanese orthography tag.
+
+3. **Use `quan` for closed loops.** Characters with definite
+   closed loops (の, る, め, む, ぬ, ね) require `quan`.
+
+4. **Use `wo` for open curves.** Characters with curved strokes
+   that don't close (ろ, あ partial, etc.) use `wo` or `wan`.
+
+5. **Explicit build order.** Use `build:` lines matching the
+   standard stroke order (top-to-bottom, left-to-right).
 
 ---
 
