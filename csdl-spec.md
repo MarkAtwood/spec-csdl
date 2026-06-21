@@ -1031,9 +1031,8 @@ prose, the wording here governs in case of any inconsistency.
     `build: from_expr`. (See §10.4.)
 16. All `ORTHO_TAG` values MUST be either a valid ISO 15924 script
     subtag as registered in the IANA Language Subtag Registry
-    [BCP 47] and listed in Appendix E, or a CSDL extension tag
-    matching `x-` followed by one or more ASCII letters.
-    (See §4.7.1.)
+    [BCP 47], or a CSDL extension tag matching `x-` followed by
+    one or more ASCII letters. (See §4.7.1, Appendix E.)
 17. A CSDL file MUST NOT contain more than one `@ortho`
     declaration. (See §4.8.)
 18. The `@ortho` declaration, if present, MUST appear before any
@@ -2390,8 +2389,10 @@ BCP 47 tag does not capture the needed distinction.
 
 CSDL recognizes the following script subtags from the IANA
 Language Subtag Registry [BCP 47] as primary orthography tags.
-Implementations MUST accept these tags; additional BCP 47 script
-subtags MAY be accepted but are not required.
+Implementations MUST accept any valid ISO 15924 script subtag,
+whether or not it is listed in this appendix. The table below
+documents tags with specific CSDL usage guidance; unlisted tags
+are valid but have no CSDL-specific semantics.
 
 | Tag    | Script Name                          | CSDL Usage                           |
 |--------|--------------------------------------|--------------------------------------|
