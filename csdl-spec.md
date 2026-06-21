@@ -171,10 +171,12 @@ does not attempt automatic disambiguation.
 CSDL defines two syntax profiles with identical semantics:
 
 **CSDL-ASCII.** The primary syntax documented in this specification.
-Uses ASCII operator names (`LR`, `TB`, `SUR`, etc.) and pinyin
-aliases for component references. Can be fully decomposed to
-7-bit ASCII: `LR(日, 月)` becomes `LR(ri4, yue4)`. Optimized for
-authoring in ASCII-limited environments and legacy systems.
+Uses ASCII operator names (`LR`, `TB`, `SUR`, etc.). Component
+references may use CJK characters, pinyin aliases, or any mix:
+`LR(日, 月)`, `LR(ri4, yue4)`, and `LR(日, yue4)` are all valid.
+When needed, files can be fully decomposed to 7-bit ASCII by
+replacing all CJK characters with pinyin aliases. Optimized for
+authoring in mixed environments and legacy systems.
 
 **CSDL-U.** A Unicode-native syntax using Ideographic Description
 Characters (U+2FF0–U+2FFB) as layout operators. No pinyin aliases;
