@@ -2,7 +2,7 @@
 
 This file provides instructions and context for AI coding agents working on this project.
 
-<!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:6cd5cc61 -->
+<!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:970c3bf2 -->
 ## Beads Issue Tracker
 
 This project uses **bd (beads)** for issue tracking. Run `bd prime` to see full workflow context and commands.
@@ -46,6 +46,7 @@ This protocol applies when ending a Beads implementation workflow. It is subordi
 
    # Team-maintainer opt-in only, unless current instructions forbid it:
    git pull --rebase
+   bd dolt push
    git push
    git status
    ```
@@ -60,18 +61,44 @@ This protocol applies when ending a Beads implementation workflow. It is subordi
 
 ## Build & Test
 
-_Add your build and test commands here_
-
 ```bash
-# Example:
-# npm install
-# npm test
+# Run Level 1 parser tests
+python3 test_csdl.py
+
+# Validate a CSDL file
+python3 csdl.py <file.csdl>  # exit 0=valid, 1=invalid
 ```
 
 ## Architecture Overview
 
-_Add a brief overview of your project architecture_
+**CSDL (CJK Stroke Description Language)** is a non-Turing DSL for describing how CJK characters are composed from strokes and components.
+
+Key files:
+- `csdl-spec.md` - Normative specification (W3C/RFC style)
+- `primer.md` - Informative tutorial for humans
+- `prompt.md` - Design decisions summary (for AI context)
+- `csdl.py` - Level 1 reference parser (~670 lines Python)
+- `test_csdl.py` - 22 test cases for parser validation
+
+Conformance levels:
+- **Level 1 (Parser)**: Syntax + semantic validation (implemented)
+- **Level 2 (Renderer)**: Bounding box computation, stroke placement
+- **Level 3 (Full)**: Stroke expansion to filled outlines
 
 ## Conventions & Patterns
 
-_Add your project-specific conventions here_
+- 12×12 grid coordinate system (origin top-left)
+- 38 strokes: 12 base + 26 compound (closed registry)
+- 8 layout operators: LR, TB, LR3, TB3, SUR, OVR, GRP, GRID
+- 3 transform operators: sc, sh, sk
+- Component names: CJK characters or pinyin with tone (e.g., `kou3`, `心.left`)
+- One-line character definitions: `明 ming2 = LR(日, 月)`
+- Block form for stroke-level components
+
+## Closed Beads (Context)
+
+- **CSDL-5nw**: Added `quan` (circle/loop) as 12th base stroke
+- **CSDL-6b2**: Appendix F - Japanese kana stroke analysis
+- **CSDL-fq9**: Made ortho tags accept any ISO 15924 code
+- **CSDL-do9**: Expanded SUR operator documentation
+- **CSDL-2nh**: Level 1 reference parser
