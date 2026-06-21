@@ -669,7 +669,7 @@ DIGIT       ::= [0-9]
 LETTER      ::= [a-zA-Z]
 INT         ::= '-'? DIGIT+
 UINT        ::= DIGIT+
-TONE        ::= [1-4]
+TONE        ::= [1-5]   (* 5 = neutral tone / 轻声 *)
 
 (* Unicode code point label: U+ followed by 4 or 6 hex digits *)
 CODEPOINT   ::= 'U+' [0-9A-Fa-f] [0-9A-Fa-f] [0-9A-Fa-f] [0-9A-Fa-f]
