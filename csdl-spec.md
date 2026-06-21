@@ -1097,7 +1097,11 @@ of whether those segments "look like" the named stroke type.
 
 A conformant parser MUST NOT reject a stroke invocation solely
 because its coordinate values produce geometry inconsistent with
-the stroke name's conventional direction.
+the stroke name's conventional direction. However, a parser MAY
+emit a warning when stroke coordinate geometry appears inconsistent
+with the stroke name (e.g., a stroke labeled `heng` with vertical
+coordinates). Such warnings are advisory and do not affect
+conformance.
 
 ---
 

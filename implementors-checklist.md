@@ -59,6 +59,7 @@ how these decisions are made.
 | Whether to warn on unknown orthography tags  | §13.1         |
 | Whether to warn on unknown minor version numbers | §4.2      |
 | Rejection of stroke invocations with wrong coordinate count  | §7.3, §7.4 |
+| Whether to warn on stroke geometry inconsistent with stroke name | §7.4 |
 
 ---
 
