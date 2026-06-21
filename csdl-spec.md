@@ -511,6 +511,11 @@ Renderers MUST NOT reject definitions that lack an `ortho:` tag.
 A definition without an `ortho:` tag is orthography-neutral and
 is valid in any context.
 
+Fallback behavior when no definition matches the requested
+orthography is implementation-defined. A renderer MAY return an
+untagged definition, return an error, skip the character, or apply
+other fallback strategies.
+
 #### 4.7.3 Scope Levels
 
 Orthography tags may be applied at three levels of granularity:

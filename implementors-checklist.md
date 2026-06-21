@@ -82,7 +82,7 @@ deterministic; visual presentation is not.
 | Orthography-based definition selection when multiple definitions exist | §4.7.2, §App E.5 |
 | Orthography-based definition filtering     | §4.7.2          |
 | Selection between implicit (@comp) and explicit (@char) definitions with distinct ortho tags | §10.6 |
-| Fallback when no ortho-matched definition exists | §App E.5   |
+| Fallback when no ortho-matched definition exists | §4.7.2     |
 | Treatment of unknown `x-` orthography tags as opaque filter keys | §13.3 |
 | Expansion of stroke geometry to filled outlines (Level 3) | §2.2 |
 
