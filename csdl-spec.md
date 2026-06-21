@@ -166,6 +166,82 @@ radical 74/130 (月 moon vs 月 meat) are disambiguated by the
 author using pinyin labels or explicit component references. CSDL
 does not attempt automatic disambiguation.
 
+### 1.5 Syntax Profiles
+
+CSDL defines two syntax profiles with identical semantics:
+
+**CSDL-ASCII.** The primary syntax documented in this specification.
+Uses ASCII operator names (`LR`, `TB`, `SUR`, etc.) and pinyin
+aliases for component references. Can be fully decomposed to
+7-bit ASCII: `LR(日, 月)` becomes `LR(ri4, yue4)`. Optimized for
+authoring in ASCII-limited environments and legacy systems.
+
+**CSDL-U.** A Unicode-native syntax using Ideographic Description
+Characters (U+2FF0–U+2FFB) as layout operators. No pinyin aliases;
+component references use Unicode characters only. Optimized for
+Unicode contexts and potential standardization.
+
+CSDL-U requires no delimiters (parentheses, commas) because IDS
+operators have fixed arity: `⿰` takes 2, `⿲` takes 3, etc.
+Parsing is unambiguous prefix notation. Nesting composes naturally:
+
+```
+# CSDL-ASCII
+森 sen1 = TB(木, LR(木, 木))
+
+# CSDL-U — no delimiters needed
+森 = ⿱木⿰木木
+```
+
+The two profiles are mechanically interconvertible. A conformant
+Level 1 parser MAY accept either or both profiles. When a parser
+accepts both, it MUST treat them as semantically equivalent.
+
+Example — the character 明 (bright) in both profiles:
+
+```
+# CSDL-ASCII (full 7-bit)
+ming2 = LR(ri4, yue4)
+
+# CSDL-ASCII (mixed, using Unicode characters)
+明 ming2 = LR(日, 月)
+
+# CSDL-U (full Unicode)
+明 = ⿰日月
+```
+
+All three forms are semantically equivalent.
+
+| CSDL-ASCII | CSDL-U | Meaning |
+|------------|--------|---------|
+| `LR(a, b)` | `⿰ab` | Left-right |
+| `TB(a, b)` | `⿱ab` | Top-bottom |
+| `LR3(a, b, c)` | `⿲abc` | Left-middle-right |
+| `TB3(a, b, c)` | `⿳abc` | Top-middle-bottom |
+| `SUR(a, b, full)` | `⿴ab` | Full surround |
+| `SUR(a, b, top)` | `⿵ab` | Surround from above |
+| `SUR(a, b, bot)` | `⿶ab` | Surround from below |
+| `SUR(a, b, left)` | `⿷ab` | Surround from left |
+| `SUR(a, b, tl)` | `⿸ab` | Surround upper-left |
+| `SUR(a, b, tr)` | `⿹ab` | Surround upper-right |
+| `SUR(a, b, bl)` | `⿺ab` | Surround lower-left |
+| `OVR(a, b)` | `⿻ab` | Overlay |
+
+CSDL-ASCII features not expressible in IDS (and thus not in
+CSDL-U basic form):
+
+- Split ratios (`LR(a, b, 4/8)`) — CSDL-U uses annotation syntax:
+  `⿰ab:4/8`
+- Transforms (`sc`, `sh`, `sk`) — CSDL-U uses annotation syntax:
+  `a@sc(8,8)`
+- `GRP` operator — no IDS equivalent
+- `GRID` operator — no IDS equivalent
+- Stroke-level definitions — both profiles use `S()` syntax
+
+This specification uses CSDL-ASCII in all examples. Appendix A
+provides the complete operator mapping. A future companion
+document will fully specify CSDL-U syntax.
+
 ---
 
 ## 2. Conformance
