@@ -73,7 +73,7 @@ Every stroke is invoked with the `S()` function:
 S(heng [2,4] [10,4] 1)
 ```
 
-This draws a `heng` (horizontal) stroke from grid point [2,4] to [10,4] at normal width. The 11 base strokes are: `heng` (horizontal), `shu` (vertical), `pie` (left-falling diagonal), `na` (right-falling diagonal), `dian` (dot), `ti` (rising), `gou` (hook), `wan` (bend), `zhe` (sharp turn), `xie` (slant), and `wo` (reclining hook). The names are romanized Chinese (pinyin) because that's what the calligraphic tradition uses.
+This draws a `heng` (horizontal) stroke from grid point [2,4] to [10,4] at normal width. The 12 base strokes are: `heng` (horizontal), `shu` (vertical), `pie` (left-falling diagonal), `na` (right-falling diagonal), `dian` (dot), `ti` (rising), `gou` (hook), `wan` (bend), `zhe` (sharp turn), `xie` (slant), `wo` (reclining hook), and `quan` (circle/loop). The names are romanized Chinese (pinyin) because that's what the calligraphic tradition uses.
 
 Compound strokes are named by concatenating their constituent segments with hyphens. `heng-zhe` is a horizontal stroke that makes a sharp turn downward. `shu-wan-gou` is a vertical stroke that bends right and then hooks. The naming is systematic: read the hyphenated name left to right and you get the stroke's trajectory.
 
@@ -81,7 +81,7 @@ Compound strokes require more coordinate points because each junction is a point
 
 The compound stroke names are semantic labels, not geometric constraints. The parser does not check whether the coordinates you provide for a `heng` (horizontal) stroke actually form a horizontal line. Two renderers given the same coordinates must produce the same line segments regardless of whether those segments "look like" the named stroke type. The name tells you *what kind of stroke it is* for classification and stroke-counting purposes; the coordinates tell you *where to draw it*.
 
-The full inventory is 37 strokes: 11 base, 12 single-fold compounds, 8 double-fold, 5 triple-fold, and 1 quadruple-fold.
+The full inventory is 38 strokes: 12 base, 12 single-fold compounds, 8 double-fold, 5 triple-fold, and 1 quadruple-fold.
 
 ## Layout Operators
 

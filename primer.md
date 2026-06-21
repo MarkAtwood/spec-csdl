@@ -127,9 +127,9 @@ the 12×12 grid (§5). Width: 0=hairline, 1=normal, 2=bold.
 
 ---
 
-## 5. Stroke Names (37 Total)
+## 5. Stroke Names (38 Total)
 
-11 base strokes (§7.1):
+12 base strokes (§7.1):
 
 | Name | Description |
 |------|-------------|
@@ -144,6 +144,7 @@ the 12×12 grid (§5). Width: 0=hairline, 1=normal, 2=bold.
 | `zhe` | Sharp turn |
 | `xie` | Slant |
 | `wo` | Reclining hook |
+| `quan` | Circle/loop ○ |
 
 26 compound strokes (§7.2, [CSDL] Appendix C) = segments joined
 at turns. Name = segment sequence. Points = segments + 1.

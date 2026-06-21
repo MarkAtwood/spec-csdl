@@ -311,7 +311,7 @@ specific additional capabilities from higher levels.
 ## 3. Terminology
 
 **base stroke**
-: One of the 11 fundamental stroke types from which all CJK
+: One of the 12 fundamental stroke types from which all CJK
   strokes are composed. See Section 7.1.
 
 **bounding box**
@@ -1075,7 +1075,7 @@ prose, the wording here governs in case of any inconsistency.
 
 ### 7.1 Base Strokes
 
-CSDL defines 11 base stroke types. These are the atomic geometric
+CSDL defines 12 base stroke types. These are the atomic geometric
 primitives from which all CJK strokes are built. Each base stroke
 has a standard name, a minimum point count, and a geometric
 interpretation.
@@ -1093,6 +1093,7 @@ interpretation.
 | zhe    | zhe2    | 2          | Sharp turn                   |
 | xie    | xie2    | 2          | Slant                        |
 | wo     | wo4     | 2          | Reclining hook               |
+| quan   | quan1   | 3          | Circle or loop (closed curve)|
 
 Note on `dian`: Like all strokes, `dian` is defined by two
 coordinate points specifying a start and end. The vector from
@@ -1108,6 +1109,15 @@ method between points (e.g., straight segments, quadratic Bézier,
 Catmull-Rom spline) is renderer-discretionary. Two conformant
 renderers MAY produce visually different curves from identical
 coordinates.
+
+Note on `quan`: The circle/loop stroke requires 3 points: start,
+apex (the point farthest from the start-end line), and end. These
+three points define an elliptical arc that returns to its starting
+region, forming a closed or nearly-closed curve. This stroke is
+essential for Japanese hiragana loops (ぬ, ね, る, etc.) and
+Classical Yi characters. Unlike other strokes, `quan` is inherently
+a closed curve; the renderer MAY connect the end point back to the
+start if the coordinates do not already coincide.
 
 ### 7.2 Compound Strokes
 
@@ -1200,10 +1210,10 @@ conformance.
 
 ### 7.5 Extension Strokes
 
-For scripts not fully covered by the 37-stroke registry (e.g.,
-Tangut, Khitan, or experimental notations), CSDL permits extension
-stroke names prefixed with `x-`. Examples: `x-tangut-loop`,
-`x-khitan-dot`, `x-experimental-curve`.
+For scripts not fully covered by the 38-stroke registry (e.g.,
+Tangut compound strokes or experimental notations), CSDL permits
+extension stroke names prefixed with `x-`. Examples:
+`x-tangut-oblique-bend`, `x-tangut-pie-na`.
 
 A Level 1 parser MUST accept `x-` prefixed stroke names without
 validating them against the closed registry. The coordinate count

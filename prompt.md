@@ -64,9 +64,9 @@ Complex components use block form:
 - @alias kou3 = 口
 - Positional variants: 心.bot, 心.left, 阜.left, 邑.right
 
-## 11 Base Strokes
+## 12 Base Strokes
 
-    heng shu pie na dian ti gou wan zhe xie wo
+    heng shu pie na dian ti gou wan zhe xie wo quan
 
 ## 26 Compound Strokes (enumerated, closed set)
 
@@ -82,7 +82,7 @@ Triple-fold (5): heng-zhe-zhe-zhe, heng-zhe-zhe-pie,
 
 Quadruple-fold (1): heng-zhe-zhe-zhe-gou
 
-Total: 37 stroke types (11 base + 26 compound).
+Total: 38 stroke types (12 base + 26 compound).
 
 Point count rule: total_points = sum(min_points) - (N-1)
 
