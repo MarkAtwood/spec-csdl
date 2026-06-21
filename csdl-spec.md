@@ -347,17 +347,17 @@ resolution. A parser MAY reject a file containing non-NFC text.
 The conventional file extension for CSDL files is `.csdl`. The
 proposed media type is `text/csdl` (see Section 15.2).
 
-A CSDL file SHOULD begin with a format declaration as its first
+A CSDL file MUST begin with a format declaration as its first
 non-comment, non-blank line:
 
     @csdl 1.0
 
-A Level 1 parser that encounters a `@csdl` declaration with a
-major version it does not support MUST reject the file. A parser
-that encounters a `@csdl` declaration with a recognized major
-version but an unknown minor version SHOULD issue a warning and
-continue processing. If no `@csdl` declaration is present, a
-parser SHOULD assume version 1.0.
+A Level 1 parser MUST reject files without a `@csdl` declaration.
+A parser that encounters a `@csdl` declaration with a major
+version it does not support MUST reject the file. A parser that
+encounters a `@csdl` declaration with a recognized major version
+but an unknown minor version SHOULD issue a warning and continue
+processing.
 
 Blank lines and comment lines MAY appear anywhere in the file.
 Comment lines begin with `#` as the first non-whitespace character.
@@ -876,7 +876,7 @@ CHAR_BLOCK  ::= '@char' WS ( CODEPOINT | CJK_CHAR ) WS PINYIN_NAME NL
 DEFINITION  ::= ALIAS_DEF | COMP_BLOCK | CHAR_INLINE | CHAR_BLOCK
 
 (* File *)
-CSDL_FILE   ::= FORMAT_DECL?
+CSDL_FILE   ::= FORMAT_DECL
                 ORTHO_DECL?
                 ( DEFINITION | COMMENT | BLANK_LINE )*
 ```
