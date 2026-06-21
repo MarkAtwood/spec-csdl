@@ -994,6 +994,14 @@ determines the visual shape of the dot (e.g., rounded, teardrop,
 or triangular) based on the stroke direction and the target
 calligraphic style.
 
+Note on curved strokes: For strokes with curved geometry (`wan`,
+`gou`, `wo`, and compounds containing them), the coordinate points
+define the path the stroke passes through. The interpolation
+method between points (e.g., straight segments, quadratic Bézier,
+Catmull-Rom spline) is renderer-discretionary. Two conformant
+renderers MAY produce visually different curves from identical
+coordinates.
+
 ### 7.2 Compound Strokes
 
 CSDL defines 26 compound stroke types. Each compound stroke is a
