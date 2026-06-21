@@ -1323,10 +1323,53 @@ The defined side values are:
 | `bl`    | Bottom and left                    | Bottom + left         | bottom, left           |
 | `br`    | Bottom and right                   | Bottom + right        | bottom, right          |
 
-Example: `SUR(門, 口)` places 口 inside 門 (full surround).
+**Visual reference:** The diagrams below show which edges the outer
+component covers (marked `#`) and where the inner component sits
+(marked `.`). Unmarked edges are open (inner extends to parent edge).
 
-Example: `SUR(广, 木, tl)` places 木 under the top-left shelter
-of 广.
+```
+full        tl          tr          top         left
++----+      +----+      +----+      +----+      +----+
+|#..#|      |#...|      |...#|      |#..#|      |#...|
+|#..#|      |#...|      |...#|      |....|      |#...|
+|#..#|      |....|      |....|      |....|      |#...|
+|#..#|      |....|      |....|      |....|      |#...|
++----+      +----+      +----+      +----+      +----+
+
+right       bot         bl          br
++----+      +----+      +----+      +----+
+|...#|      |....|      |....|      |....|
+|...#|      |....|      |....|      |....|
+|...#|      |....|      |....|      |....|
+|...#|      |#..#|      |#...|      |...#|
++----+      +----+      +----+      +----+
+```
+
+**Parameter order:** `SUR(outer, inner, side, inset)` — the outer
+(surrounding) component comes first, the inner (surrounded) component
+second, then optional side and inset.
+
+**Examples with real characters:**
+
+| Side    | Example               | Character | Meaning              |
+|---------|-----------------------|-----------|----------------------|
+| `full`  | `SUR(囗, 或)`         | 國        | full enclosure       |
+| `tl`    | `SUR(广, 木, tl)`     | 床        | shelter from top-left|
+| `tr`    | `SUR(气, 米, tr)`     | 氣        | shelter from top-right|
+| `top`   | `SUR(冖, 元, top)`    | 冤        | cover from above     |
+| `left`  | `SUR(匚, 矢, left)`   | 医        | box open right       |
+| `right` | `SUR(勹, 口, right)`  | 句        | wrap from right      |
+| `bot`   | `SUR(凵, 山, bot)`    | 凶        | container open top   |
+| `bl`    | `SUR(辶, 首, bl)`     | 道        | radical at bottom-left|
+| `br`    | `SUR(廴, 聿, br)`     | 建        | radical at bottom-right|
+
+**Example with custom inset:**
+
+    # Tight fit: inner component closer to outer edges
+    SUR(囗, 王, full, 1)
+
+    # Loose fit: more padding around inner component
+    SUR(門, 口, full, 3)
 
 ### 8.7 OVR (Overlay)
 

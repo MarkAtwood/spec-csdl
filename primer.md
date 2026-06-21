@@ -77,9 +77,31 @@ grid boundaries but any positive integers work (the renderer
 divides proportionally). Common values: 6/6, 4/8, 5/7, 3/9,
 4/4/4, 3/6/3.
 
-SUR side specifiers (when not full enclosure): `tl` `tr` `top`
-`right` `left` `bot` `bl` `br`. Example: `SUR(广, 木, tl)` =
-shelter from top-left.
+**SUR side specifiers** — which edges does the outer component cover?
+
+```
+full: all    tl: ┌     tr: ┐     top: ───    left: │     right: │
+               └              ┘       open     open       open
+bot: ───     bl: └     br: ┘                 right      left
+  open
+  top
+```
+
+Parameter order: `SUR(outer, inner, side, inset)`. Defaults: `full`, `2`.
+
+| Side   | Example             | Result |
+|--------|---------------------|--------|
+| `full` | `SUR(囗, 或)`       | 國     |
+| `tl`   | `SUR(广, 木, tl)`   | 床     |
+| `tr`   | `SUR(气, 米, tr)`   | 氣     |
+| `top`  | `SUR(冖, 元, top)`  | 冤     |
+| `left` | `SUR(匚, 矢, left)` | 医     |
+| `right`| `SUR(勹, 口, right)`| 句     |
+| `bot`  | `SUR(凵, 山, bot)`  | 凶     |
+| `bl`   | `SUR(辶, 首, bl)`   | 道     |
+| `br`   | `SUR(廴, 聿, br)`   | 建     |
+
+Custom inset: `SUR(囗, 王, full, 1)` = tight fit (1 unit padding).
 
 ---
 
