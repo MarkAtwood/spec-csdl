@@ -1803,6 +1803,11 @@ https://learn.microsoft.com/en-us/typography/opentype/spec/
 CHISE Project, "Character Processing Based on Character
 Ontology", https://www.chise.org/
 
+### 15.5 Feedback and Errata
+
+Feedback, errata, and issue reports:
+https://github.com/MarkAtwood/spec-csdl/issues
+
 ---
 
 ## Appendix A: IDS Operator Mapping
