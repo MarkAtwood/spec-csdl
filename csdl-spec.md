@@ -136,7 +136,10 @@ CSDL does not address:
 
 CSDL output is a tree of positioned strokes in a coordinate space.
 A renderer MAY transform this output into filled outlines, SVG
-paths, bitmap images, or any other representation.
+paths, bitmap images, or any other representation. CSDL is
+structural geometry, not rendering instructions; implementations
+that require filled outlines, anti-aliasing, or rasterization
+should transform CSDL output using standard graphics libraries.
 
 ### 1.4 Design Principles
 
