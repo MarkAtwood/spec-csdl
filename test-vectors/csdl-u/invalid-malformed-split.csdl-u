@@ -1,0 +1,39 @@
+# Invalid: malformed split annotations
+# These should all fail parsing
+
+# Missing denominator
+err01 = ⿰日月:4/
+
+# Missing numerator
+err02 = ⿰日月:/8
+
+# No slash
+err03 = ⿰日月:48
+
+# Non-numeric
+err04 = ⿰日月:a/b
+
+# Negative values
+err05 = ⿰日月:-4/8
+
+# Zero values (semantically invalid)
+err06 = ⿰日月:0/8
+err07 = ⿰日月:4/0
+
+# Too many parts for 2-ary
+err08 = ⿰日月:4/4/4
+
+# Too few parts for 3-ary
+err09 = ⿲一二三:4/8
+
+# Floating point
+err10 = ⿰日月:4.5/7.5
+
+# Colon only
+err11 = ⿰日月:
+
+# Double colon
+err12 = ⿰日月::4/8
+
+# Split in wrong position
+err13 = ⿰:4/8日月

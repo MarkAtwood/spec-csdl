@@ -1,0 +1,8 @@
+# Invalid: 3-ary operators with 2 operands
+# These should all fail parsing
+
+# ⿲ takes 3, given 2
+err01 = ⿲一二
+
+# ⿳ takes 3, given 2
+err02 = ⿳上下

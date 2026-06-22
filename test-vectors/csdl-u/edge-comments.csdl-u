@@ -1,0 +1,12 @@
+# Edge case: comment handling
+
+# Full line comments
+# This is a comment
+明 = ⿰日月
+
+# Inline comments (if supported)
+林 = ⿰木木 # two trees
+
+# Comment-only file should be valid
+# just a comment
+# another comment

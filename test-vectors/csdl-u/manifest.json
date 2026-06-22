@@ -1,0 +1,219 @@
+{
+  "name": "CSDL-U Test Vectors",
+  "version": "1.0.0",
+  "description": "Comprehensive test vectors for CSDL-U parsing conformance",
+  "spec_reference": "csdl-spec.md §1.5",
+  "created": "2026-06-21",
+  "categories": {
+    "valid": {
+      "description": "Test cases that MUST parse successfully",
+      "files": [
+        {
+          "file": "valid-2ary-simple.csdl-u",
+          "description": "All 10 two-ary IDS operators with simple operands",
+          "operators_tested": ["⿰", "⿱", "⿴", "⿵", "⿶", "⿷", "⿸", "⿹", "⿺", "⿻"],
+          "expected": "valid"
+        },
+        {
+          "file": "valid-3ary-simple.csdl-u",
+          "description": "Both 3-ary IDS operators with simple operands",
+          "operators_tested": ["⿲", "⿳"],
+          "expected": "valid"
+        },
+        {
+          "file": "valid-nested.csdl-u",
+          "description": "Operators with nested sub-expressions (1-2 levels)",
+          "operators_tested": ["⿰", "⿱", "⿲", "⿵"],
+          "expected": "valid"
+        },
+        {
+          "file": "valid-deep-nesting.csdl-u",
+          "description": "Expressions with 3+ levels of nesting",
+          "operators_tested": ["⿰", "⿱", "⿺"],
+          "expected": "valid"
+        },
+        {
+          "file": "valid-all-operators.csdl-u",
+          "description": "Demonstrates all 12 IDS operators are recognized",
+          "operators_tested": ["⿰", "⿱", "⿲", "⿳", "⿴", "⿵", "⿶", "⿷", "⿸", "⿹", "⿺", "⿻"],
+          "expected": "valid"
+        },
+        {
+          "file": "valid-split-annotations.csdl-u",
+          "description": "Split ratio annotations using :n/m syntax",
+          "features_tested": ["split_2ary", "split_3ary", "split_nested"],
+          "expected": "valid"
+        },
+        {
+          "file": "valid-transform-annotations.csdl-u",
+          "description": "Transform annotations using @op(params) syntax",
+          "features_tested": ["sc", "sh", "sk", "transform_on_operand", "chained_transforms"],
+          "expected": "valid"
+        },
+        {
+          "file": "valid-combined-annotations.csdl-u",
+          "description": "Both split and transform annotations combined",
+          "features_tested": ["split_with_transform", "transform_with_split"],
+          "expected": "valid"
+        },
+        {
+          "file": "valid-definitions.csdl-u",
+          "description": "Full character definition syntax",
+          "features_tested": ["char_definition", "codepoint_definition", "chained_definitions"],
+          "expected": "valid"
+        }
+      ]
+    },
+    "invalid": {
+      "description": "Test cases that MUST be rejected",
+      "files": [
+        {
+          "file": "invalid-wrong-arity-2to3.csdl-u",
+          "description": "2-ary operators given 3 operands",
+          "error_type": "arity_error",
+          "expected": "invalid"
+        },
+        {
+          "file": "invalid-wrong-arity-3to2.csdl-u",
+          "description": "3-ary operators given 2 operands",
+          "error_type": "arity_error",
+          "expected": "invalid"
+        },
+        {
+          "file": "invalid-wrong-arity-3to4.csdl-u",
+          "description": "3-ary operators given 4 operands",
+          "error_type": "arity_error",
+          "expected": "invalid"
+        },
+        {
+          "file": "invalid-missing-operands.csdl-u",
+          "description": "Operators with 0-1 operands when more required",
+          "error_type": "missing_operand",
+          "expected": "invalid"
+        },
+        {
+          "file": "invalid-malformed-split.csdl-u",
+          "description": "Malformed split ratio annotations",
+          "error_type": "syntax_error",
+          "expected": "invalid"
+        },
+        {
+          "file": "invalid-malformed-transform.csdl-u",
+          "description": "Malformed transform annotations",
+          "error_type": "syntax_error",
+          "expected": "invalid"
+        },
+        {
+          "file": "invalid-definition-syntax.csdl-u",
+          "description": "Malformed character definition syntax",
+          "error_type": "syntax_error",
+          "expected": "invalid"
+        }
+      ]
+    },
+    "edge": {
+      "description": "Edge cases that test boundary conditions",
+      "files": [
+        {
+          "file": "edge-empty.csdl-u",
+          "description": "Empty file (comments only)",
+          "expected": "implementation_defined",
+          "note": "May be valid (empty result) or error depending on interpretation"
+        },
+        {
+          "file": "edge-single-char.csdl-u",
+          "description": "Single character without operator",
+          "expected": "implementation_defined",
+          "note": "Tests whether standalone component reference is valid expression"
+        },
+        {
+          "file": "edge-whitespace.csdl-u",
+          "description": "Various whitespace handling scenarios",
+          "expected": "valid",
+          "note": "Parser should be whitespace-tolerant"
+        },
+        {
+          "file": "edge-comments.csdl-u",
+          "description": "Comment handling (line and inline)",
+          "expected": "valid",
+          "note": "Standard # comment syntax"
+        },
+        {
+          "file": "edge-unicode.csdl-u",
+          "description": "Unicode edge cases (extensions, radicals)",
+          "expected": "valid",
+          "note": "Tests handling of CJK Extension B/C/D/E/F, Kangxi radicals"
+        },
+        {
+          "file": "edge-combining.csdl-u",
+          "description": "Combining marks and normalization",
+          "expected": "implementation_defined",
+          "note": "Tests NFC/NFD handling, zero-width characters"
+        },
+        {
+          "file": "edge-maxdepth.csdl-u",
+          "description": "Maximum nesting depth stress test",
+          "expected": "valid",
+          "note": "Parser should handle 10+ levels of nesting"
+        }
+      ]
+    }
+  },
+  "operators": {
+    "2ary": {
+      "description": "Operators that take exactly 2 operands",
+      "members": [
+        {"char": "⿰", "codepoint": "U+2FF0", "name": "Left-Right", "csdl_ascii": "LR(a, b)"},
+        {"char": "⿱", "codepoint": "U+2FF1", "name": "Top-Bottom", "csdl_ascii": "TB(a, b)"},
+        {"char": "⿴", "codepoint": "U+2FF4", "name": "Full Surround", "csdl_ascii": "SUR(a, b, full)"},
+        {"char": "⿵", "codepoint": "U+2FF5", "name": "Surround Above", "csdl_ascii": "SUR(a, b, top)"},
+        {"char": "⿶", "codepoint": "U+2FF6", "name": "Surround Below", "csdl_ascii": "SUR(a, b, bot)"},
+        {"char": "⿷", "codepoint": "U+2FF7", "name": "Surround Left", "csdl_ascii": "SUR(a, b, left)"},
+        {"char": "⿸", "codepoint": "U+2FF8", "name": "Surround Upper-Left", "csdl_ascii": "SUR(a, b, tl)"},
+        {"char": "⿹", "codepoint": "U+2FF9", "name": "Surround Upper-Right", "csdl_ascii": "SUR(a, b, tr)"},
+        {"char": "⿺", "codepoint": "U+2FFA", "name": "Surround Lower-Left", "csdl_ascii": "SUR(a, b, bl)"},
+        {"char": "⿻", "codepoint": "U+2FFB", "name": "Overlay", "csdl_ascii": "OVR(a, b)"}
+      ]
+    },
+    "3ary": {
+      "description": "Operators that take exactly 3 operands",
+      "members": [
+        {"char": "⿲", "codepoint": "U+2FF2", "name": "Left-Middle-Right", "csdl_ascii": "LR3(a, b, c)"},
+        {"char": "⿳", "codepoint": "U+2FF3", "name": "Top-Middle-Bottom", "csdl_ascii": "TB3(a, b, c)"}
+      ]
+    }
+  },
+  "annotation_syntax": {
+    "split": {
+      "pattern": ":n/m",
+      "description": "Split ratio annotation for layout operators",
+      "examples": [":4/8", ":3/9", ":3/6/3"],
+      "constraints": ["n and m must be positive integers", "sum should equal 12 for grid alignment"]
+    },
+    "transform": {
+      "pattern": "@op(params)",
+      "description": "Transform annotation for operands or expressions",
+      "operators": {
+        "sc": {"params": "sx,sy", "description": "Scale transform"},
+        "sh": {"params": "dx,dy", "description": "Shift transform"},
+        "sk": {"params": "kx,ky", "description": "Skew transform"}
+      }
+    }
+  },
+  "expected_ast_format": {
+    "description": "Expected parse result structure (conceptual)",
+    "definition": {
+      "type": "definition",
+      "name": "string (character or codepoint)",
+      "expression": "expression_node"
+    },
+    "expression_node": {
+      "type": "operator | component",
+      "operator": "IDS character (for operator type)",
+      "operands": "array of expression_node (for operator type)",
+      "component": "string (for component type)",
+      "split": "optional split annotation",
+      "transform": "optional transform annotation"
+    }
+  }
+}

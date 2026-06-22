@@ -1,0 +1,8 @@
+# Valid 3-ary operator tests (simple)
+# Each IDS 3-ary operator with three simple operands
+
+# Left-middle-right (⿲ U+2FF2)
+樹 = ⿲木対寸
+
+# Top-middle-bottom (⿳ U+2FF3)
+鼻 = ⿳自田廾

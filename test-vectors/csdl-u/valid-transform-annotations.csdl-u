@@ -1,0 +1,23 @@
+# Valid transform annotation tests
+# Transform operators use @op(params) syntax
+
+# Scale transform
+小 = 大@sc(8,8)
+縮 = ⿰糸宿@sc(10,10)
+
+# Shift transform
+移 = ⿰禾多@sh(1,0)
+偏 = ⿰亻扁@sh(0,2)
+
+# Skew transform
+斜 = ⿰斗余@sk(1,0)
+傾 = ⿰亻頃@sk(0,1)
+
+# Transform on operand (not whole expression)
+待 = ⿰亻@sc(4,12)寺
+
+# Nested transforms
+組 = ⿰糸且@sc(8,8)@sh(2,2)
+
+# Transform with nested expression
+霧 = ⿱雨務@sc(10,10)

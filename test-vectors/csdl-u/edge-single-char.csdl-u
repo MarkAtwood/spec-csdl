@@ -1,0 +1,11 @@
+# Edge case: single character (no operator)
+# These may or may not be valid depending on interpretation
+
+# Single character as expression (valid standalone component reference)
+日
+
+# Single character definition (identity/alias)
+明 = 明
+
+# Single character with transform
+日@sc(8,8)

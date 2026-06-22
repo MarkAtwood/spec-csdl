@@ -1,0 +1,17 @@
+# Edge case: maximum nesting depth
+# Testing deeply nested expressions
+
+# 5 levels deep
+d5 = ⿱⿰⿱⿰⿱一一一一一一
+
+# 8 levels deep
+d8 = ⿱⿰⿱⿰⿱⿰⿱⿰一一一一一一一一一
+
+# 10 levels deep (stress test)
+d10 = ⿱⿰⿱⿰⿱⿰⿱⿰⿱⿰一一一一一一一一一一一
+
+# Imbalanced deep tree (all left)
+left8 = ⿰⿰⿰⿰⿰⿰⿰⿰一一一一一一一一一
+
+# Imbalanced deep tree (all right)
+right8 = ⿰一⿰一⿰一⿰一⿰一⿰一⿰一⿰一一

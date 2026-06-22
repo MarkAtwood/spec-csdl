@@ -1,0 +1,26 @@
+# Valid nested expression tests
+# Operators with nested sub-expressions
+
+# Single level nesting
+森 = ⿱木⿰木木
+
+# Classic example: nesting in second operand
+鵬 = ⿰⿱月⿰月月鳥
+
+# Nesting in first operand
+焱 = ⿱火⿰火火
+
+# Mixed operators
+器 = ⿱⿰口口⿰口口
+
+# 3-ary with nested 2-ary
+街 = ⿲彳⿱土⿱土丁亍
+
+# Multiple levels of nesting
+鑫 = ⿱金⿰金金
+
+# Deeply nested example
+燚 = ⿱⿰火火⿰火火
+
+# Nested surround
+巍 = ⿱山⿵冃⿱田又

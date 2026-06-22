@@ -1,0 +1,26 @@
+# Valid split annotation tests
+# Split ratios specified with :n/m syntax
+
+# Basic 2-part splits
+待 = ⿰亻寺:4/8
+持 = ⿰扌寺:3/9
+休 = ⿰亻木:5/7
+林 = ⿰木木:6/6
+
+# 3-part splits for 3-ary operators
+街 = ⿲彳圭亍:3/6/3
+洲 = ⿲氵⿱丶川氵:2/8/2
+
+# Top-bottom with split
+草 = ⿱艹早:3/9
+思 = ⿱田心:7/5
+
+# Split with nested expression
+森 = ⿱木⿰木木:4/8
+露 = ⿱雨路:5/7
+
+# Edge case: equal split (explicit)
+林 = ⿰木木:6/6
+
+# Edge case: heavily unequal
+借 = ⿰亻昔:2/10

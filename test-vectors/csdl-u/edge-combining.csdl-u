@@ -1,0 +1,22 @@
+# Edge case: combining marks and normalization
+# Testing how the parser handles Unicode normalization issues
+
+# Note: These tests explore edge behavior that parsers should either:
+# - Handle consistently (normalize before parsing)
+# - Reject explicitly
+
+# NFC vs NFD forms (if parser cares)
+# The character 明 could be written as:
+# - Precomposed: U+660E
+# - Decomposed: hypothetically if it had combining forms
+
+# Characters with combining marks
+# Attempting to use combining marks in operand position
+# This should likely be rejected or normalized
+
+# Zero-width characters (potential injection)
+# ZWSP: U+200B, ZWNJ: U+200C, ZWJ: U+200D
+# err01 = 明​ = ⿰日月  # contains ZWSP after 明
+
+# BOM handling (should be stripped)
+# File starting with U+FEFF

@@ -1,0 +1,8 @@
+# Invalid: 3-ary operators with 4 operands
+# These should all fail parsing
+
+# ⿲ takes 3, given 4 (trailing operand is orphan)
+err01 = ⿲一二三四
+
+# ⿳ takes 3, given 4
+err02 = ⿳上中下底

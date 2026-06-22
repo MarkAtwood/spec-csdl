@@ -1,0 +1,27 @@
+# Edge case: Unicode edge cases
+# Testing various Unicode scenarios
+
+# CJK Unified Ideographs Extension B (surrogate pairs in UTF-16)
+# U+20000 is 𠀀
+𠀁 = ⿰𠀀𠀀
+
+# CJK Compatibility Ideographs
+# U+F900 豈
+豈 = ⿱山己
+
+# Rare characters from Extension C/D/E/F
+# These may not render but should parse
+# U+2A700 𪜀
+𪜀 = ⿰一一
+
+# Kangxi Radicals (U+2F00-U+2FDF)
+# These are distinct from the regular CJK characters
+⼀ = ⿰一一
+
+# CJK Radicals Supplement (U+2E80-U+2EFF)
+⺀ = ⿰一一
+
+# Multiple code points that look similar but differ
+# U+6708 月 vs U+2F49 ⽉ (Kangxi radical)
+明 = ⿰日月
+明2 = ⿰日⽉

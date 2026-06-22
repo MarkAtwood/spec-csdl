@@ -1,0 +1,33 @@
+# Invalid: 2-ary operators with 3 operands
+# These should all fail parsing
+
+# ⿰ takes 2, given 3 (trailing operand is orphan)
+# Parser should fail: incomplete parse or arity error
+err01 = ⿰日月火
+
+# ⿱ takes 2, given 3
+err02 = ⿱上中下
+
+# ⿴ takes 2, given 3
+err03 = ⿴囗一二
+
+# ⿵ takes 2, given 3
+err04 = ⿵門一二
+
+# ⿶ takes 2, given 3
+err05 = ⿶凵一二
+
+# ⿷ takes 2, given 3
+err06 = ⿷匚一二
+
+# ⿸ takes 2, given 3
+err07 = ⿸厂一二
+
+# ⿹ takes 2, given 3
+err08 = ⿹气一二
+
+# ⿺ takes 2, given 3
+err09 = ⿺辶一二
+
+# ⿻ takes 2, given 3
+err10 = ⿻十一二

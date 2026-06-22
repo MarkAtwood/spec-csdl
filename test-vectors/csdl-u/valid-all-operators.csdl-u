@@ -1,0 +1,18 @@
+# Valid test using all 12 IDS operators
+# Demonstrates each operator is recognized
+
+# 2-ary operators (10 total)
+lh01 = ⿰一一
+tb01 = ⿱一一
+fs01 = ⿴口十
+sa01 = ⿵冂人
+sb01 = ⿶凵人
+sl01 = ⿷匚人
+ul01 = ⿸厂人
+ur01 = ⿹气人
+ll01 = ⿺辶人
+ov01 = ⿻十一
+
+# 3-ary operators (2 total)
+lr01 = ⿲一丨一
+tb01a = ⿳一一一

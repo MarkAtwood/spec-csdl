@@ -1,0 +1,20 @@
+# Valid deep nesting tests
+# Expressions with 3+ levels of nesting
+
+# 3 levels deep
+驫 = ⿱⿰馬馬馬
+
+# 4 levels deep
+轟 = ⿱車⿰車車
+
+# Complex nested structure
+龘 = ⿱龍⿰龍龍
+
+# Mixed operators at depth
+囊 = ⿱⿵冖⿰⿱口口⿱口口⿱𧘇襄
+
+# Balanced tree structure
+疊 = ⿱⿰㚒㚒⿱⿱宜宜⿱且且
+
+# All 2-ary operators can nest
+露 = ⿱雨⿺辶⿱目⿰夂口

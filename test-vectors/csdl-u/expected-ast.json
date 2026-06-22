@@ -1,0 +1,212 @@
+{
+  "description": "Expected AST structures for selected test cases",
+  "note": "These are canonical parse results that conformant parsers should produce",
+  "format": "Simplified AST representation",
+
+  "examples": {
+    "simple_2ary": {
+      "input": "明 = ⿰日月",
+      "ast": {
+        "type": "definition",
+        "name": "明",
+        "expression": {
+          "type": "operator",
+          "operator": "⿰",
+          "arity": 2,
+          "operands": [
+            {"type": "component", "value": "日"},
+            {"type": "component", "value": "月"}
+          ]
+        }
+      }
+    },
+
+    "simple_3ary": {
+      "input": "樹 = ⿲木対寸",
+      "ast": {
+        "type": "definition",
+        "name": "樹",
+        "expression": {
+          "type": "operator",
+          "operator": "⿲",
+          "arity": 3,
+          "operands": [
+            {"type": "component", "value": "木"},
+            {"type": "component", "value": "対"},
+            {"type": "component", "value": "寸"}
+          ]
+        }
+      }
+    },
+
+    "nested": {
+      "input": "森 = ⿱木⿰木木",
+      "ast": {
+        "type": "definition",
+        "name": "森",
+        "expression": {
+          "type": "operator",
+          "operator": "⿱",
+          "arity": 2,
+          "operands": [
+            {"type": "component", "value": "木"},
+            {
+              "type": "operator",
+              "operator": "⿰",
+              "arity": 2,
+              "operands": [
+                {"type": "component", "value": "木"},
+                {"type": "component", "value": "木"}
+              ]
+            }
+          ]
+        }
+      }
+    },
+
+    "with_split": {
+      "input": "待 = ⿰亻寺:4/8",
+      "ast": {
+        "type": "definition",
+        "name": "待",
+        "expression": {
+          "type": "operator",
+          "operator": "⿰",
+          "arity": 2,
+          "operands": [
+            {"type": "component", "value": "亻"},
+            {"type": "component", "value": "寺"}
+          ],
+          "split": {"left": 4, "right": 8}
+        }
+      }
+    },
+
+    "with_transform": {
+      "input": "小 = 大@sc(8,8)",
+      "ast": {
+        "type": "definition",
+        "name": "小",
+        "expression": {
+          "type": "component",
+          "value": "大",
+          "transform": {
+            "type": "sc",
+            "params": {"sx": 8, "sy": 8}
+          }
+        }
+      }
+    },
+
+    "operand_transform": {
+      "input": "待 = ⿰亻@sc(4,12)寺",
+      "ast": {
+        "type": "definition",
+        "name": "待",
+        "expression": {
+          "type": "operator",
+          "operator": "⿰",
+          "arity": 2,
+          "operands": [
+            {
+              "type": "component",
+              "value": "亻",
+              "transform": {
+                "type": "sc",
+                "params": {"sx": 4, "sy": 12}
+              }
+            },
+            {"type": "component", "value": "寺"}
+          ]
+        }
+      }
+    },
+
+    "deep_nesting": {
+      "input": "d5 = ⿱⿰⿱⿰⿱一一一一一一",
+      "ast": {
+        "type": "definition",
+        "name": "d5",
+        "expression": {
+          "type": "operator",
+          "operator": "⿱",
+          "arity": 2,
+          "operands": [
+            {
+              "type": "operator",
+              "operator": "⿰",
+              "arity": 2,
+              "operands": [
+                {
+                  "type": "operator",
+                  "operator": "⿱",
+                  "arity": 2,
+                  "operands": [
+                    {
+                      "type": "operator",
+                      "operator": "⿰",
+                      "arity": 2,
+                      "operands": [
+                        {
+                          "type": "operator",
+                          "operator": "⿱",
+                          "arity": 2,
+                          "operands": [
+                            {"type": "component", "value": "一"},
+                            {"type": "component", "value": "一"}
+                          ]
+                        },
+                        {"type": "component", "value": "一"}
+                      ]
+                    },
+                    {"type": "component", "value": "一"}
+                  ]
+                },
+                {"type": "component", "value": "一"}
+              ]
+            },
+            {"type": "component", "value": "一"}
+          ]
+        }
+      }
+    }
+  },
+
+  "error_examples": {
+    "wrong_arity": {
+      "input": "err = ⿰日月火",
+      "error": {
+        "type": "parse_error",
+        "reason": "trailing_operand",
+        "message": "Expression '⿰日月' is complete; '火' is unparsed"
+      }
+    },
+
+    "missing_operand": {
+      "input": "err = ⿰日",
+      "error": {
+        "type": "parse_error",
+        "reason": "missing_operand",
+        "message": "Operator ⿰ requires 2 operands, found 1"
+      }
+    },
+
+    "malformed_split": {
+      "input": "err = ⿰日月:4/",
+      "error": {
+        "type": "syntax_error",
+        "reason": "invalid_split",
+        "message": "Split annotation ':4/' is malformed"
+      }
+    },
+
+    "unknown_transform": {
+      "input": "err = 日@rot(90)",
+      "error": {
+        "type": "syntax_error",
+        "reason": "unknown_transform",
+        "message": "Transform operator 'rot' is not recognized"
+      }
+    }
+  }
+}

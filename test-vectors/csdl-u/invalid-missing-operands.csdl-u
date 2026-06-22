@@ -1,0 +1,26 @@
+# Invalid: operators with missing operands
+# These should all fail parsing
+
+# 2-ary with 1 operand
+err01 = ⿰日
+err02 = ⿱上
+err03 = ⿴囗
+err04 = ⿵門
+err05 = ⿶凵
+err06 = ⿷匚
+err07 = ⿸厂
+err08 = ⿹气
+err09 = ⿺辶
+err10 = ⿻十
+
+# 3-ary with 1 operand
+err11 = ⿲一
+err12 = ⿳上
+
+# 2-ary with 0 operands (operator only)
+err13 = ⿰
+err14 = ⿱
+
+# 3-ary with 0 operands
+err15 = ⿲
+err16 = ⿳

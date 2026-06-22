@@ -1,0 +1,32 @@
+# Valid 2-ary operator tests (simple)
+# Each IDS 2-ary operator with two simple operands
+
+# Left-right (⿰ U+2FF0)
+明 = ⿰日月
+
+# Top-bottom (⿱ U+2FF1)
+想 = ⿱相心
+
+# Full surround (⿴ U+2FF4)
+國 = ⿴囗或
+
+# Surround from above (⿵ U+2FF5)
+問 = ⿵門口
+
+# Surround from below (⿶ U+2FF6)
+凶 = ⿶凵㐅
+
+# Surround from left (⿷ U+2FF7)
+匡 = ⿷匚王
+
+# Surround upper-left (⿸ U+2FF8)
+房 = ⿸戶方
+
+# Surround upper-right (⿹ U+2FF9)
+氣 = ⿹气米
+
+# Surround lower-left (⿺ U+2FFA)
+道 = ⿺辶首
+
+# Overlay (⿻ U+2FFB)
+巫 = ⿻工从

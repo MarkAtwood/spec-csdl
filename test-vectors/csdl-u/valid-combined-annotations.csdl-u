@@ -1,0 +1,17 @@
+# Valid combined annotation tests
+# Both split and transform annotations
+
+# Split then transform on expression
+森 = ⿱木⿰木木:4/8@sc(10,10)
+
+# Transform on operand with split
+待 = ⿰亻@sc(4,12)寺:3/9
+
+# Multiple transforms with split
+縮 = ⿰糸宿:4/8@sc(8,8)@sh(1,1)
+
+# Complex combination
+霧 = ⿱雨@sc(12,6)務:4/8
+
+# 3-ary with split and transform
+街 = ⿲彳圭亍:3/6/3@sh(0,1)

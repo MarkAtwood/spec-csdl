@@ -1,0 +1,26 @@
+# Invalid: malformed definition syntax
+# These should all fail parsing
+
+# Missing equals sign
+err01 明 ⿰日月
+
+# Double equals
+err02 = 明 == ⿰日月
+
+# Equals in wrong position
+err03 = = ⿰日月明
+
+# Empty left side
+err04 = = ⿰日月
+
+# Empty right side
+err05 = 明 =
+
+# Multiple expressions (no operator between)
+err06 = 明 = ⿰日月 ⿱木木
+
+# Invalid character name (starts with digit)
+err07 = 123 = ⿰日月
+
+# Operator as definition name
+err08 = ⿰ = ⿰日月

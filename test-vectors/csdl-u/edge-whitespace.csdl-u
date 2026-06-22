@@ -1,0 +1,23 @@
+# Edge case: whitespace handling
+# CSDL-U should be whitespace-tolerant between tokens
+
+# No spaces (minimal)
+明=⿰日月
+
+# Extra spaces around equals
+明  =  ⿰日月
+
+# Leading/trailing whitespace
+  明 = ⿰日月
+
+# Spaces in expression (between characters)
+明 = ⿰ 日 月
+
+# Tabs instead of spaces
+明	=	⿰日月
+
+# Multiple blank lines between definitions
+明 = ⿰日月
+
+
+林 = ⿰木木

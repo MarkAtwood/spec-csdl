@@ -1,0 +1,47 @@
+# Invalid: malformed transform annotations
+# These should all fail parsing
+
+# Unknown transform operator
+err01 = 日@rot(90)
+err02 = 日@flip(x)
+err03 = 日@unknown(1,2)
+
+# Missing parameters
+err04 = 日@sc()
+err05 = 日@sh()
+err06 = 日@sk()
+
+# Wrong parameter count for sc
+err07 = 日@sc(8)
+err08 = 日@sc(8,8,8)
+
+# Wrong parameter count for sh
+err09 = 日@sh(1)
+err10 = 日@sh(1,2,3)
+
+# Wrong parameter count for sk
+err11 = 日@sk(1)
+err12 = 日@sk(1,0,1)
+
+# Non-numeric parameters
+err13 = 日@sc(a,b)
+err14 = 日@sh(x,y)
+
+# Missing parentheses
+err15 = 日@sc8,8
+err16 = 日@sc
+
+# Unclosed parentheses
+err17 = 日@sc(8,8
+err18 = 日@sh(1,2
+
+# Double @
+err19 = 日@@sc(8,8)
+
+# @ only
+err20 = 日@
+
+# Out of range parameters
+err21 = 日@sc(100,100)
+err22 = 日@sc(-5,-5)
+err23 = 日@sh(100,100)

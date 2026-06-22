@@ -1,0 +1,32 @@
+# Valid character definition tests
+# Full definition syntax: char = expression
+
+# Simple definitions
+明 = ⿰日月
+林 = ⿰木木
+森 = ⿱木⿰木木
+
+# Definition with code point (CSDL-U style)
+U+660E = ⿰日月
+U+6797 = ⿰木木
+
+# Multiple definitions in sequence
+明 = ⿰日月
+暗 = ⿰日音
+曉 = ⿰日堯
+晴 = ⿰日青
+
+# Definition referencing prior definition (if permitted)
+相 = ⿰木目
+想 = ⿱相心
+
+# Surround variants
+國 = ⿴囗或
+園 = ⿴囗袁
+圖 = ⿴囗啚
+
+# Complex expressions in definitions
+鬱 = ⿳⿲木缶木冖⿺⿻彡⿱ム⿻コ⿱⿲丿丿丿⿰彡彡
+
+# Edge: single character operands only
+好 = ⿰女子
