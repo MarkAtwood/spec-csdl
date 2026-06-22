@@ -126,6 +126,15 @@ using IETF BCP 47 script subtags. Renderers MAY use orthography
 tags for variant selection but MUST NOT require them for
 evaluation.
 
+Note: "CJK" in CSDL refers specifically to CJK Unified Ideographs
+(Han characters) as defined by Unicode, not to all writing systems
+used in China, Japan, and Korea. Hangul (the Korean alphabet) is
+out of scope: it is a featural alphabet with regular, algorithmic
+composition rules, not a stroke-based logographic system. Japanese
+Kana (Hiragana and Katakana) are syllabaries with simpler stroke
+structure; Appendix F provides an informative analysis of Kana
+strokes, but Kana are not a primary target of this specification.
+
 CSDL does not address:
 
 - Glyph rendering (anti-aliasing, hinting, rasterization)
@@ -2691,6 +2700,180 @@ The hiragana へ and katakana ヘ are visually near-identical.
 
 5. **Explicit build order.** Use `build:` lines matching the
    standard stroke order (top-to-bottom, left-to-right).
+
+
+## Appendix G: Historical CJK-Adjacent Scripts (Informative)
+
+This appendix documents historical scripts that share the stroke-based
+composition model with Han characters but may require extension strokes
+(`x-` prefix) for complete coverage. These scripts are explicitly out
+of scope for normative CSDL but are viable targets for x- extensions.
+
+### G.1 Tangut (西夏文) — Script Code: Tang
+
+**Unicode block:** U+17000–U+18AFF (Tangut), U+18D00–U+18D8F (Tangut Supplement)
+**Character count:** 6,136 characters
+**Status:** Fully encoded (Unicode 9.0, 2016)
+
+Tangut was the writing system of the Western Xia dynasty (1038–1227 CE).
+Though visually similar to Chinese characters, Tangut characters are
+semantically independent—they cannot be read as Chinese. The script
+uses the same basic stroke types as Chinese but combines them in
+unique ways.
+
+**Stroke analysis:**
+- Most Tangut characters use standard CJK strokes
+- 755 Tangut components are catalogued in Unicode
+- Some compound strokes have no direct CJK equivalent
+
+**Recommended x- extensions:**
+```
+x-tangut-oblique-bend    # Unique angled bend not captured by wan/zhe
+x-tangut-pie-na          # pie merging directly into na (requires 5 points)
+x-tangut-pie-dian-gou    # pie falling into dian then curving into gou
+x-tangut-heng-zhe-spray  # horizontal with multi-way diagonal spray
+```
+
+**CSDL modeling:** Most Tangut characters can be modeled using standard
+CSDL strokes. The x- extensions above cover rare compound strokes that
+appear in specific character subsets.
+
+### G.2 Khitan Scripts (契丹文) — Script Code: Kits
+
+**Unicode block:** U+18B00–U+18CFF (Khitan Small Script)
+**Character count:** 471 characters (small script only)
+**Status:** Small script encoded (Unicode 13.0, 2020); large script pending
+
+Khitan scripts were used by the Khitan people (907–1125 CE). Two forms
+exist: a logographic "large script" (契丹大字) directly influenced by
+Chinese, and a phonetic "small script" (契丹小字) with syllabic blocks.
+
+**Stroke analysis:**
+- Uses standard Chinese stroke types
+- Stroke combinations are unique to Khitan
+- Small script uses block composition similar to Hangul
+
+**CSDL modeling:** The standard 38-stroke registry is sufficient.
+Khitan's complexity is in composition (layout operators), not stroke
+primitives. No x- extensions are anticipated.
+
+### G.3 Jurchen Script (女真文) — Script Code: Jurc
+
+**Unicode block:** Not yet assigned (proposed ~1,376 characters)
+**Character count:** ~1,376 characters
+**Status:** Pending encoding (UTC document L2/20-002)
+
+Jurchen script was used by the Jurchen people (1119–1234 CE) who
+founded the Jin dynasty. It was directly modeled on Khitan large
+script and Chinese characters.
+
+**Stroke analysis:**
+- Uses 5 basic stroke types (subset of Chinese)
+- Structurally similar to Chinese characters
+- Simpler than Tangut
+
+**CSDL modeling:** The standard 38-stroke registry is likely sufficient.
+No x- extensions are anticipated. CSDL definitions should use a
+provisional `ortho:Jurc` tag pending Unicode encoding.
+
+### G.4 Nüshu (女書) — Script Code: Nshu
+
+**Unicode block:** U+1B170–U+1B2FF (Nüshu)
+**Character count:** 396 characters
+**Status:** Fully encoded (Unicode 10.0, 2017)
+
+Nüshu ("women's script") was a syllabic script used exclusively by
+women in Jiangyong County, Hunan Province, China. It has a distinctive
+rhomboid shape with slanted characters.
+
+**Stroke analysis:**
+- Only 4 stroke types: dot, horizontal, oblique, arc
+- All strokes slant approximately 5–15° clockwise
+- Extremely simplified compared to Chinese
+
+**CSDL modeling:** The standard stroke registry covers Nüshu's 4 types:
+- `dian` → dot
+- `heng` → horizontal (with slant via coordinates)
+- `pie` or `na` → oblique
+- `wan` → arc
+
+The rhomboid slant is achieved through coordinate placement, not
+special strokes. No x- extensions needed; `ortho:Nshu` suffices.
+
+### G.5 Chữ Nôm (𡨸喃) — Script Code: None (use Hani)
+
+**Unicode block:** CJK Unified Ideographs (scattered across extensions)
+**Character count:** ~9,299 characters (per VHN project)
+**Status:** Encoded within CJK blocks
+
+Chữ Nôm ("Southern characters") was used to write Vietnamese from the
+13th–20th centuries. Characters are composed from Chinese radicals and
+phonetic elements, similar to Chinese phono-semantic compounds.
+
+**Stroke analysis:**
+- Uses standard Chinese strokes exclusively
+- Novel combinations of existing radicals
+- Some characters are graphically identical to rare Chinese variants
+
+**CSDL modeling:** The standard 38-stroke registry is fully sufficient.
+Chữ Nôm characters are defined using the same components as Chinese
+characters. Use `ortho:Hani` (generic Han) or specify Vietnamese
+context in metadata. No x- extensions needed.
+
+### G.6 Sawndip (古壮字 / Sawgonjdip) — Script Code: None (use Hani)
+
+**Unicode block:** CJK Unified Ideographs Extension F, G
+**Character count:** ~2,400 characters encoded (thousands more unencoded)
+**Status:** Partially encoded
+
+Sawndip ("uncooked characters") is a logographic script used by the
+Zhuang people of Guangxi, China, for over 1,000 years. Characters are
+borrowed or adapted from Chinese.
+
+**Stroke analysis:**
+- Uses standard Chinese strokes
+- Regional variants exist (different stroke forms for same meaning)
+- Some simplified forms may use non-standard strokes
+
+**CSDL modeling:** The standard stroke registry covers most Sawndip
+characters. Regional variants with simplified strokes may need x-
+extensions on a case-by-case basis:
+```
+x-sawndip-simplified-*   # For regional simplified stroke forms
+```
+
+### G.7 Summary: Extension Stroke Requirements
+
+| Script | x- Extensions Needed | Notes |
+|--------|---------------------|-------|
+| Tangut | Yes (3–4 strokes) | Unique compound strokes |
+| Khitan | No | Standard strokes, unique layouts |
+| Jurchen | No | Subset of Chinese strokes |
+| Nüshu | No | 4 basic strokes, all in registry |
+| Chữ Nôm | No | Chinese strokes, novel combinations |
+| Sawndip | Possibly (rare) | Regional variants may need extensions |
+
+### G.8 Using x- Extensions
+
+Authors working with historical scripts should follow these conventions:
+
+1. **Naming:** Use `x-{script}-{stroke-description}` format
+   - `x-tangut-oblique-bend`
+   - `x-sawndip-simplified-heng`
+
+2. **Documentation:** Include a comment describing the stroke
+   ```csdl
+   # x-tangut-oblique-bend: Angled bend unique to Tangut,
+   # combines features of wan and zhe at ~45° angle.
+   ```
+
+3. **Coordinate count:** Extension strokes may use any count ≥ 2
+
+4. **Fallback:** Renderers that don't recognize an x- stroke SHOULD
+   render it as connected line segments through the coordinate points
+
+5. **Promotion:** Widely-adopted x- extensions may be proposed for
+   inclusion in the standard registry via the CSDL issue tracker
 
 ---
 
